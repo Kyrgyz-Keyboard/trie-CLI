@@ -45,7 +45,7 @@ class Trie:
             answers.append(ans2)
             answers.append(ans3)
             return answers
-        return None
+        return []
 
     def find_node(self, words):
         node = self.root
@@ -79,4 +79,4 @@ class TextProcessor:
                 self.trie.insert(words_before, cur_word)
 
     def get_likeliest_next_words(self, words):
-        return self.trie.get_three_words(words)
+        return self.trie.get_three_words(words.lower())

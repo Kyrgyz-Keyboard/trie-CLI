@@ -1,5 +1,6 @@
 import pickle
 import typer
+from typing import List
 from process_trie import TextProcessor
 
 cli = typer.Typer()
@@ -15,10 +16,10 @@ def load(file_path):
         pickle.dump(text_processor, q)
 
 @cli.command()
-def hints(words):
+def hints(words: List[str] = typer.Argument(..., show_default=False)):
     with open("processor_state.pkl", "rb") as q:
         cur_processor = pickle.load(q)
-    ans = cur_processor.get_likeliest_next_words(words)
+    ans = cur_processor.get_likeliest_next_words(' '.join(words))
     typer.echo(f"Here are the hints:")
     typer.echo(ans)
 
